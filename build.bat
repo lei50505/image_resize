@@ -1,2 +1,2 @@
-cxfreeze --icon="ui/main.ico" -OO -c -s run.py
+pyinstaller -F run.py
 pause
