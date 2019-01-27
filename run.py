@@ -1,28 +1,26 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""doc"""
+
 import os
-import cv2
-import sys
-import shutil
+import traceback
+import cv
 
-WIDTH = 2048
+def main():
+    """doc"""
+    for (dir_path, _, file_names) in os.walk("in"):
+        for file_name in file_names:
+            in_path = dir_path + os.sep + file_name
+            out_path = "out" + os.sep + file_name
 
-for (dir_path, dir_names, file_names) in os.walk("in"):
-    for file_name in file_names:
-        file_path = dir_path + os.sep + file_name
-        
-        print(file_path)
-        image = cv2.imread(file_path)
-        if image.shape[1] <= WIDTH:
-            print("Not Resize")
-            shutil.copyfile(file_path, "out" + os.sep + file_name)
-            continue
-        res = cv2.resize(image, (0, 0), fx=WIDTH/image.shape[1],  fy=WIDTH/image.shape[1])
-        cv2.imwrite("out" + os.sep + file_name, res)
-        print("Resize")
+            print(in_path)
+            cv.image_resize(in_path, out_path, 2000, 2000)
+            cv.cvt_gray(out_path, out_path)
 
-print("Success")
-input("Press Any Key to Exit ...")
-
-
+if __name__ == '__main__':
+    try:
+        main()
+    except BaseException:
+        print(traceback.format_exc())
+    input("Press Enter to Continue:")
