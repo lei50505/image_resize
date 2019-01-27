@@ -13,10 +13,12 @@ def main():
         for file_name in file_names:
             in_path = dir_path + os.sep + file_name
             out_path = "out" + os.sep + file_name
-
-            print(in_path)
-            cv.image_resize(in_path, out_path, 2000, 2000)
-            cv.cvt_gray(out_path, out_path)
+            try:
+                cv.image_resize(in_path, out_path, 2000, 2000)
+                cv.cvt_gray(out_path, out_path)
+                print(in_path)
+            except BaseException:
+                print(in_path + " fail")
 
 if __name__ == '__main__':
     try:
